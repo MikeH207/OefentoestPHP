@@ -2,10 +2,14 @@
 
 try {
     $dbh = new PDO("mysql:host=localhost;dbname=filmclub", "root", "");
-    $sql = "SELECT * FROM film";
-    $films = $dbh->query($sql);
+    $sqlFilm = "SELECT * FROM film";
+    $films = $dbh->query($sqlFilm);
+    $sqlBeoordeling = "SELECT * FROM beoordeling";
+    $beoordelingen = $dbh->query($sqlBeoordeling);
     foreach ($films as $film) {
-        print $film["id"] . " " . $film["titel"] . " " . $film['genre'] . "<br/>";
+        echo $film["titel"] . "<br/>";
+        echo "<a href='edit.php?id=" . $film["id"] . "'> Edit</a><br/>";
+        echo "<a href='beoordelingen.php?id=" . $film["id"] . "'> Beoordeling</a><br/><br>";
     }
 }
 catch (PDOexception $e) {
